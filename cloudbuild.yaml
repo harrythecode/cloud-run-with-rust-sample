@@ -3,7 +3,7 @@ steps:
     entrypoint: 'pack'
     args:
       - 'build'
-      - 'gcr.io/$PROJECT_ID/rust-cloud-run-sample:latest'
+      - 'gcr.io/$PROJECT_ID/cloud-run-with-rust-sample:latest'
       - '--builder'
       - 'gcr.io/buildpacks/builder:latest'
       - '--buildpack'
@@ -15,7 +15,7 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args:
       - 'push'
-      - 'gcr.io/$PROJECT_ID/rust-cloud-run-sample:latest'
+      - 'gcr.io/$PROJECT_ID/cloud-run-with-rust-sample:latest'
     id: Push
 
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk:slim'
@@ -23,16 +23,16 @@ steps:
       - 'run'
       - 'services'
       - 'update'
-      - 'rust-cloud-run-sample'
+      - 'cloud-run-with-rust-sample'
       - '--platform=managed'
-      - '--image=gcr.io/$PROJECT_ID/rust-cloud-run-sample:latest'
+      - '--image=gcr.io/$PROJECT_ID/cloud-run-with-rust-sample:latest'
       - '--region=asia-northeast1'
       - '--quiet'
     id: Deploy
     entrypoint: gcloud
 
 images:
-  - 'gcr.io/$PROJECT_ID/rust-cloud-run-sample:latest'
+  - 'gcr.io/$PROJECT_ID/cloud-run-with-rust-sample:latest'
 
 options:
   logging: CLOUD_LOGGING_ONLY

@@ -1,8 +1,9 @@
 [package]
-name = "rust-cloud-run-sample"
+name = "cloud-run-with-rust-sample"
 version = "0.1.0"
+edition = "2021"
 authors = ["harrythecode"]
-description = "Simple Rust Cloud Run sample with Axum"
+description = "Cloud Run with Rust Sample - Rust Cloud Run service with Axum"
 
 [dependencies]
 axum = "0.7"

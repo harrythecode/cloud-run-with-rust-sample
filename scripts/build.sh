@@ -1,6 +1,6 @@
 #!/bin/bash
 echo "📦 Building container with Cloud Buildpacks"
-IMAGE_NAME="rust-cloud-run-sample"
+IMAGE_NAME="cloud-run-with-rust-sample"
 if docker images | grep -q $IMAGE_NAME; then
     echo "🗑️  Removing existing image..."
     docker rmi $IMAGE_NAME
