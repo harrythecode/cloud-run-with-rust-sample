@@ -1,0 +1,40 @@
+steps:
+  - name: 'gcr.io/k8s-skaffold/pack'
+    entrypoint: 'pack'
+    args:
+      - 'build'
+      - 'gcr.io/$PROJECT_ID/rust-cloud-run-sample:latest'
+      - '--builder'
+      - 'gcr.io/buildpacks/builder:latest'
+      - '--buildpack'
+      - 'docker.io/paketocommunity/rust'
+      - '--network'
+      - 'cloudbuild'
+    id: Build
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - 'gcr.io/$PROJECT_ID/rust-cloud-run-sample:latest'
+    id: Push
+
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk:slim'
+    args:
+      - 'run'
+      - 'services'
+      - 'update'
+      - 'rust-cloud-run-sample'
+      - '--platform=managed'
+      - '--image=gcr.io/$PROJECT_ID/rust-cloud-run-sample:latest'
+      - '--region=asia-northeast1'
+      - '--quiet'
+    id: Deploy
+    entrypoint: gcloud
+
+images:
+  - 'gcr.io/$PROJECT_ID/rust-cloud-run-sample:latest'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+
+timeout: '600s'

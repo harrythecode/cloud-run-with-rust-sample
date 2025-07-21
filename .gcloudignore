@@ -1,0 +1,18 @@
+# Rust関連
+target/
+*.rls/
+*.rustfmt
+
+# Git関連
+.git/
+.gitignore
+
+# IDE関連
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS関連
+.DS_Store
+Thumbs.db 

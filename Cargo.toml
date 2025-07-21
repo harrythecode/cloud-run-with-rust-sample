@@ -1,0 +1,9 @@
+[package]
+name = "rust-cloud-run-sample"
+version = "0.1.0"
+authors = ["harrythecode"]
+description = "Simple Rust Cloud Run sample with Axum"
+
+[dependencies]
+axum = "0.7"
+tokio = { version = "1.0", features = ["full"] }
